@@ -17,8 +17,8 @@ class GuessNumberViewModel: ViewModel() { // HARAP DIINGAT ViewModel KAPITAAL
 
     // START DARI 3 ATTEMPTS
 
-    private val _uiState = MutableStateFlow(GameUIState()) //dipake di viewmodel, diupdate
-    val uiState: StateFlow<GameUIState> = _uiState.asStateFlow() //buat panggil
+    private val _uiState = MutableStateFlow(GameUIState(3, 0, 0)) //dipake di viewmodel, diupdate
+    val uiState: StateFlow<GameUIState> = _uiState.asStateFlow() //buat panggil di view
 
     fun newNumber() {
         _uiState.update {currentState ->
@@ -52,11 +52,9 @@ class GuessNumberViewModel: ViewModel() { // HARAP DIINGAT ViewModel KAPITAAL
     fun RestartGame() {
         _uiState.update { currentState ->
             currentState.copy(
-                attempt = 0,
+                attempt = 3,
                 score = 0,
             )
         }
-
-        newNumber()
     }
 }

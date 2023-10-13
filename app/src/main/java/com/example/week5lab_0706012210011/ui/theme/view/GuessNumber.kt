@@ -135,34 +135,39 @@ fun GuessNumberView(
     }
 
     if (dialogshow) {
-        AlertDialog(onDismissRequest = {
-            dialogshow = false
-            GNviewmodel.RestartGame()
-        }, title = {
-            Text(
-                text = "Game Over!",
-            )
-
-        }, text = {
-
-            Text(
-                text = "You scored: ${GN_UIState.score}\nThank you for playing this useless game"
-            )
-
-        }, confirmButton = {
-            Button(onClick = {
-                System.exit(0)
-            }) {
-                Text("Exit")
-            }
-            Button(onClick = {
+        AlertDialog(
+            onDismissRequest = {
                 dialogshow = false
                 GNviewmodel.RestartGame()
-            }) {
-                Text("Play Again")
+            },
+            title = {
+                Text(text = "Game Over!")
+            },
+            text = {
+                Text(
+                    text = "You scored: ${GN_UIState.score}\nThank you for playing this useless game"
+                )
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        System.exit(0)
+                    }
+                ) {
+                    Text("Exit")
+                }
+                Button(
+                    onClick = {
+                        dialogshow = false
+                        GNviewmodel.RestartGame()
+                    }
+                ) {
+                    Text("Play Again")
+                }
             }
-        })
+        )
     }
+
 }
 
 @Preview(showBackground = true, showSystemUi = true)

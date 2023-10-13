@@ -1,6 +1,7 @@
 package com.example.week5lab_0706012210011.ui.theme.view
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -67,7 +68,9 @@ fun IPKCalculatorView(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "Courses", fontSize = 32.sp, fontWeight = FontWeight.Bold
+                        text = "Courses",
+                        fontSize = 32.sp,
+                        fontWeight = FontWeight.Bold
                     )
 
                     Image(
@@ -144,18 +147,41 @@ fun IPKCalculatorView(
                     Button(
                         onClick = {
                             IPKCalc_viewmodel.addCourse(
-                                input_Name, input_SKS.toIntOrNull() ?: 0, input_Score.toDoubleOrNull() ?: 0.0
+                                input_Name,
+                                input_SKS.toIntOrNull() ?: 0,
+                                input_Score.toDoubleOrNull() ?: 0.0
                             )
                         },
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier
+                            .weight(1f)
                             .padding(top = 8.dp),
                         colors = ButtonDefaults.buttonColors(Color.Blue),
-                        enabled = input_SKS != "" && input_SKS.toIntOrNull() != 0 && input_Name != "" && input_Score != "" && input_Score.toDoubleOrNull() != 0.0
+                        enabled = input_SKS != "" && (input_SKS.toIntOrNull()
+                            ?: 0) != 0 && (input_SKS.toIntOrNull()
+                            ?: 0) > 0 && input_Name != "" && input_Score != "" && (input_Score.toDoubleOrNull()
+                            ?: 0.0) != 0.0 && (input_Score.toDoubleOrNull()
+                            ?: 0.0) > 0 && (input_Score.toDoubleOrNull() ?: 0.0) <= 4.0
                     ) {
                         Icon(
                             imageVector = Icons.Filled.Add,
                             contentDescription = "Add Course",
                             modifier = Modifier.padding(vertical = 10.dp)
+                        )
+                    }
+                }
+                if (variabel_UIState.CourseList.size == 0) {
+                    Column(
+                        modifier = Modifier.fillMaxWidth()
+                            .padding(top = 16.dp)
+                            .background(color = Color(0xFFED8639), RoundedCornerShape(16.dp))
+                            .padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "No course assigned",
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
                         )
                     }
                 }
@@ -170,8 +196,7 @@ fun IPKCalculatorView(
 
 @Composable
 fun CourseCard(
-    IPKCalc_viewmodel: IPKCalculatorViewModel,
-    course: Course
+    IPKCalc_viewmodel: IPKCalculatorViewModel, course: Course
 ) {
     Card(
         modifier = Modifier
@@ -179,7 +204,7 @@ fun CourseCard(
             .padding(top = 16.dp),
         elevation = CardDefaults.cardElevation(4.dp),
         shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(Color.LightGray)
+        colors = CardDefaults.cardColors(Color(0xFFF9ECE0))
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -207,7 +232,7 @@ fun CourseCard(
                     IPKCalc_viewmodel.deleteCourse(course)
                 },
                 modifier = Modifier.weight(1f),
-                colors = ButtonDefaults.buttonColors(Color.LightGray)
+                colors = ButtonDefaults.buttonColors(Color(0xFFF9ECE0))
             ) {
                 Icon(
                     imageVector = Icons.Filled.Delete,
