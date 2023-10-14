@@ -41,6 +41,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.week5lab_0706012210011.R
 import com.example.week5lab_0706012210011.model.Course
 import com.example.week5lab_0706012210011.ui.theme.viewmodel.IPKCalculatorViewModel
@@ -48,7 +49,9 @@ import com.example.week5lab_0706012210011.ui.theme.viewmodel.IPKCalculatorViewMo
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IPKCalculatorView(
-    IPKCalc_viewmodel: IPKCalculatorViewModel = IPKCalculatorViewModel()
+//    IPKCalc_viewmodel: IPKCalculatorViewModel = IPKCalculatorViewModel()
+    IPKCalc_viewmodel: IPKCalculatorViewModel = viewModel()
+
 ) {
     val variabel_UIState by IPKCalc_viewmodel.uiState.collectAsState()
 
@@ -85,9 +88,10 @@ fun IPKCalculatorView(
                     fontSize = 14.sp,
                 )
                 Text(
-                    text = "IPK: ${variabel_UIState.total_IPK}",
-                    fontSize = 14.sp,
+                    text = "IPK: ${String.format("%.2f", variabel_UIState.total_IPK)}",
+                    fontSize = 14.sp
                 )
+
 
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp)

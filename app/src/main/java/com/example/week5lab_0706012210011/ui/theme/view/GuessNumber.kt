@@ -32,13 +32,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.week5lab_0706012210011.ui.theme.viewmodel.GuessNumberViewModel
 import java.lang.Integer.parseInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GuessNumberView(
-    GNviewmodel: GuessNumberViewModel = GuessNumberViewModel() // ngefetch functionnya
+//    GNviewmodel: GuessNumberViewModel = GuessNumberViewModel() --> bug after replay
+    GNviewmodel: GuessNumberViewModel = viewModel()
 ) {
     var input by rememberSaveable { mutableStateOf("") }
     var dialogshow by rememberSaveable { mutableStateOf(false) }

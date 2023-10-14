@@ -15,7 +15,6 @@ class IPKCalculatorViewModel: ViewModel() {
     private val _uiState = MutableStateFlow(IPKUIState())
     val uiState: StateFlow<IPKUIState> = _uiState.asStateFlow()
 
-
     fun CalculateSKS_and_IPK() {
         var SKS = 0
         var IPK = 0.0
